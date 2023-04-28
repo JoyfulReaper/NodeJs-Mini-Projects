@@ -1,0 +1,23 @@
+{
+  "name": "weatherthing",
+  "version": "1.0.0",
+  "description": "Weather Thing...",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "weather"
+  ],
+  "author": "Kyle Givler",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
