@@ -47,4 +47,4 @@ export const conditionConstants = {
     ModerateOrHeavyRainWithThunder : 1276,
     PatchyLightSnowWithThunder : 1279,
     ModerateOrHeavySnowWithThunder : 1282
-}
+};

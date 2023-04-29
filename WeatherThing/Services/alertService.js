@@ -1,16 +1,18 @@
-import conditionService from "./conditionService.js";
-import * as condtionConstants from '../condtionConstants.js';
+import ConditionService from "./conditionService.js";
+import { conditionConstants } from '../conditionConstants.js';
+
+const conditionService = new ConditionService();
 
 export default class AlertService {
     #alertConditions = [];
     #previousAlertCode = 0;
 
-    constuctor() {
-        SetupAlertConditions();
+    constructor() {
+        this.setupAlertConditions();
     }
 
     sendAlert(code, sendDuplicateAlerts, onlyAlertonAlertCondtions) {
-        if((onlyAlertonAlertCondtions && !isAlertCondition(code)) ||
+        if((onlyAlertonAlertCondtions && !this.isAlertCondition(code)) ||
              (!sendDuplicateAlerts && code == this.#previousAlertCode)) {
             return;
         }
@@ -23,54 +25,56 @@ export default class AlertService {
     }
 
     isAlertCondition(code) {
-        return this.#alertConditions.some(condition => condition.code == code);
+        return this.#alertConditions.some(condition => condition.code === code);
     }
 
-    SetupAlertConditions() {
+    setupAlertConditions() {
         const conditions = conditionService.getConditions();
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.Blizzard));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.BlowingSnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.Fog));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.FreezingDrizzle));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.FreezingFog));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.HeavyFreezingDrizzle));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.HeavyRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.HeavyRainAtTimes));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.HeavySnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.IcePellets));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightDrizzle));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightFreezingRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightRainShower));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightShowersOfIcePellets));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightSleet));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightSleetShowers));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightSnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.LightSnowShowers));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.Mist));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavyFreezingRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavyRainShower));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavyRainWithThunder));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavyShowersOfIcePellets));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavySleet));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavySleetShowers));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavySnowShowers));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateOrHeavySnowWithThunder));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateRainAtTimes));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ModerateSnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyFreezingDrizzlePossible));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyHeavySnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyLightDrizzle));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyLightRain));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyLightRainWithThunder));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyLightSnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyLightSnowWithThunder));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyModerateSnow));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchyRainPossible));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchySleetPossible));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.PatchySnowPossible));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.ThunderyOutbreaksPossible));
-        this.#alertConditions.push(conditions.find(condition => condition.code === condtionConstants.TorrentialRainShower));
+        console.log(conditionConstants.Blizzard)
+        console.log(conditions.find(condition => condition.code === conditionConstants.Blizzard));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.Blizzard));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.BlowingSnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.Fog));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.FreezingDrizzle));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.FreezingFog));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.HeavyFreezingDrizzle));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.HeavyRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.HeavyRainAtTimes));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.HeavySnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.IcePellets));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightDrizzle));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightFreezingRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightRainShower));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightShowersOfIcePellets));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightSleet));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightSleetShowers));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightSnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.LightSnowShowers));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.Mist));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavyFreezingRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavyRainShower));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavyRainWithThunder));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavyShowersOfIcePellets));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavySleet));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavySleetShowers));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavySnowShowers));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateOrHeavySnowWithThunder));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateRainAtTimes));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ModerateSnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyFreezingDrizzlePossible));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyHeavySnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyLightDrizzle));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyLightRain));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyLightRainWithThunder));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyLightSnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyLightSnowWithThunder));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyModerateSnow));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchyRainPossible));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchySleetPossible));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.PatchySnowPossible));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.ThunderyOutbreaksPossible));
+        this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.TorrentialRainShower));
     }
 }
