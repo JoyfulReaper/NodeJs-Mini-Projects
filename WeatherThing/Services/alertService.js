@@ -1,7 +1,9 @@
 import ConditionService from "./conditionService.js";
+import EmailService from "./emailService.js";
 import { conditionConstants } from '../conditionConstants.js';
 
 const conditionService = new ConditionService();
+const emailService = new EmailService();
 
 export default class AlertService {
     #alertConditions = [];
@@ -19,12 +21,13 @@ export default class AlertService {
         }
 
         const condition = conditionService.getCondition(code);
-        const subject = `Weather Alert: ${condition.day}`;
-        const body = `Weather Alert: ${condition.day}`;
+        const subject = `jsWeather Alert: ${condition.day}`;
+        const body = `jsWeather Alert: ${condition.day}`;
 
         this.#previousAlertCode = code;
 
         console.log(`Sending alert: ${subject} - ${body}`);
+        emailService.sendEmail(process.env.ALERT_TO, subject, body);
     }
 
     isAlertCondition(code) {
