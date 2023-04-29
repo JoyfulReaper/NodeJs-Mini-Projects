@@ -14,12 +14,15 @@ export default class AlertService {
     sendAlert(code, sendDuplicateAlerts, onlyAlertonAlertCondtions) {
         if((onlyAlertonAlertCondtions && !this.isAlertCondition(code)) ||
              (!sendDuplicateAlerts && code == this.#previousAlertCode)) {
+            console.log("Not sending alert due to parameters.")    
             return;
         }
 
         const condition = conditionService.getCondition(code);
         const subject = `Weather Alert: ${condition.day}`;
         const body = `Weather Alert: ${condition.day}`;
+
+        this.#previousAlertCode = code;
 
         console.log(`Sending alert: ${subject} - ${body}`);
     }
@@ -30,8 +33,6 @@ export default class AlertService {
 
     setupAlertConditions() {
         const conditions = conditionService.getConditions();
-        console.log(conditionConstants.Blizzard)
-        console.log(conditions.find(condition => condition.code === conditionConstants.Blizzard));
         this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.Blizzard));
         this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.BlowingSnow));
         this.#alertConditions.push(conditions.find(condition => condition.code === conditionConstants.Fog));
